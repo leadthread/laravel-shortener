@@ -7,6 +7,7 @@ use Zenapply\Bitly\Bitly as BitlyDriver;
 class Bitly implements UrlShortener
 {
     protected $config;
+    protected $driver;
 
     public function __construct()
     {
