@@ -14,7 +14,7 @@ class Bitly implements UrlShortener
         $this->config = config('shortener.bitly');
 
         if(!$shortener instanceof BitlyDriver){
-            $this->shortener = new BitlyDriver($this->config['token']);
+            $shortener = new BitlyDriver($this->config['token']);
         }
         
         $this->shortener = $shortener;
