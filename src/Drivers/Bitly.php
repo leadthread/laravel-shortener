@@ -7,15 +7,20 @@ use Zenapply\Bitly\Bitly as BitlyDriver;
 class Bitly implements UrlShortener
 {
     protected $config;
-    protected $driver;
+    protected $shortener;
 
-    public function __construct()
+    public function __construct(BitlyDriver $shortener = null)
     {
         $this->config = config('shortener.bitly');
-        $this->driver = new BitlyDriver($this->config['token']);
+
+        if(!$shortener instanceof BitlyDriver){
+            $this->shortener = new BitlyDriver($this->config['token']);
+        }
+        
+        $this->shortener = $shortener;
     }
 
     public function shorten($url, $encode = true){
-        return $this->driver->shorten($url, $encode);
+        return $this->shortener->shorten($url, $encode);
     }
 }

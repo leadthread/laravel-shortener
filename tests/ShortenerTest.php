@@ -4,7 +4,8 @@ namespace Zenapply\Shortener\Tests;
 
 use Zenapply\Shortener\Shortener;
 use Zenapply\Shortener\Exceptions\ShortenerException;
-use Zenapply\Shortener\Drivers\Bitly;
+use Zenapply\Shortener\Drivers\Bitly as BitlyDriver;
+use Zenapply\Bitly\Bitly;
 
 class ShortenerTest extends TestCase
 {
@@ -27,12 +28,12 @@ class ShortenerTest extends TestCase
 
     protected function getShortenerWithMockedDriver($data,$driver = 'bitly'){
         if($driver==='bitly')
-            $mock = $this->getMock(Bitly::class);
+            $mock = $this->getMock(Bitly::class,[],['token']);
 
         $mock->expects($this->any())
              ->method('shorten')
              ->will($this->returnValue($data));
 
-        return new Shortener($mock);
+        return new Shortener(new BitlyDriver($mock));
     }
 }
