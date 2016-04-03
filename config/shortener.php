@@ -17,7 +17,7 @@ return [
          * The duration in minutes to remember the url in cache
          */
         'duration' => env('SHORTENER_CACHE_DURATION',1440),
-    ];
+    ],
 
     /**
      * Bitly settings
