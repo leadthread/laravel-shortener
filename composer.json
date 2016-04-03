@@ -1,0 +1,41 @@
+{
+    "name": "zenapply/laravel-shortener",
+    "description": "",
+    "keywords": [
+        "laravel",
+        "url shortener",
+        "shortener",
+        "url",
+        "tylercd100",
+        "zenapply"
+    ],
+    "homepage": "https://github.com/zenapply/laravel-shortener",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler Arbon",
+            "email": "tylercd100@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "Zenapply\\Shortener\\":"src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zenapply\\Shortener\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^5.4|^7.0",
+        "illuminate/support": "^5.0.0",
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.1.0",
+        "phpunit/phpunit": "^4.8 || ^5.0",
+    },
+    "suggest": {
+    }
+}
