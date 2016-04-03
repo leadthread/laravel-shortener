@@ -4,6 +4,7 @@ namespace Zenapply\Shortener;
 
 use Illuminate\Support\Facades\Cache;
 use Zenapply\Shortener\Drivers\Bitly;
+use Zenapply\Shortener\Drivers\UrlShortener;
 use Zenapply\Shortener\Exceptions\ShortenerException;
 
 /**
@@ -14,10 +15,15 @@ class Shortener
     protected $config;
     protected $driver;
 
-    public function __construct()
+    public function __construct(UrlShortener $driver = null)
     {
         $this->config = config('shortener');
-        $this->driver = $this->getDriver();
+
+        if(!$driver instanceof UrlShortener){
+            $driver = $this->getDriver();
+        }
+        
+        $this->driver = $driver;
     }
 
     protected function getDriver(){
