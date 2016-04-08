@@ -42,6 +42,8 @@ $url = "https://github.com/zenapply/laravel-shortener";
 $shortUrl = Shortener::shorten($url);
 ```
 
+Laravel Shortener also takes advantage or Laravel's caching features. Just simply edit your config file to change the caching variables.
+
 Dont forget to add this to the top of the file 
 ```php
 //If you updated your aliases array in "config/app.php"
