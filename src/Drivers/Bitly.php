@@ -3,24 +3,32 @@
 namespace Zenapply\Shortener\Drivers;
 
 use Zenapply\Bitly\Bitly as BitlyDriver;
+use Zenapply\Shortener\Interfaces\UrlShortener;
+use Zenapply\Shortener\Rotators\Bitly as BitlyRotator;
 
 class Bitly implements UrlShortener
 {
     protected $config;
-    protected $shortener;
+    protected $rotator;
 
-    public function __construct(BitlyDriver $shortener = null)
+    public function __construct(BitlyRotator $rotator = null)
     {
         $this->config = config('shortener.bitly');
 
-        if(!$shortener instanceof BitlyDriver){
-            $shortener = new BitlyDriver($this->config['token']);
+        if(!$rotator instanceof BitlyRotator){
+            $drivers = [];
+
+            foreach ($this->config as $c) {
+                $drivers[] = new BitlyDriver($c['token']);
+            }
+
+            $rotator = new BitlyRotator($drivers);
         }
         
-        $this->shortener = $shortener;
+        $this->rotator = $rotator;
     }
 
     public function shorten($url, $encode = true){
-        return $this->shortener->shorten($url, $encode);
+        return $this->rotator->shorten($url, $encode);
     }
 }

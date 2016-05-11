@@ -4,7 +4,7 @@ namespace Zenapply\Shortener;
 
 use Illuminate\Support\Facades\Cache;
 use Zenapply\Shortener\Drivers\Bitly;
-use Zenapply\Shortener\Drivers\UrlShortener;
+use Zenapply\Shortener\Interfaces\UrlShortener;
 use Zenapply\Shortener\Exceptions\ShortenerException;
 
 /**

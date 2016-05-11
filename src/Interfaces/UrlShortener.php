@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenapply\Shortener\Drivers;
+namespace Zenapply\Shortener\Interfaces;
 
 interface UrlShortener
 {
