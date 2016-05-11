@@ -31,7 +31,7 @@
     "require": {
         "php": "^5.4|^7.0",
         "illuminate/support": "^5.0",
-        "zenapply/php-bitly": "^1.0"
+        "zenapply/php-bitly": "^1.2"
     },
     "require-dev": {
         "orchestra/testbench": "^3.1",

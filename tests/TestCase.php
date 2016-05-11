@@ -28,6 +28,16 @@ class TestCase extends Orchestra
     }
 
     /**
+     * @param \Illuminate\Foundation\Application $app
+     */
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Zenapply\Shortener\Facades\Shortener',
+        ];
+    }
+
+    /**
      * Define environment setup.
      *
      * @param  \Illuminate\Foundation\Application  $app
@@ -42,7 +52,10 @@ class TestCase extends Orchestra
                 'duration' => 1440,
             ],
             'bitly' => [
-                'token' => 'TOKENFOOBAR',
+                ['token' => 'TOKENFOOBAR1'],
+                ['token' => 'TOKENFOOBAR2'],
+                ['token' => 'TOKENFOOBAR3'],
+                ['token' => 'TOKENFOOBAR4'],
             ], 
         ]);
     }
