@@ -2,18 +2,18 @@
 
 namespace Zenapply\Shortener\Rotators;
 
+use Exception;
 use Zenapply\Shortener\Exceptions\ShortenerException;
-use Zenapply\Bitly\Exceptions\BitlyRateLimitException;
 
 class Bitly extends Rotator
 {
-    protected function tryShortener($driver, $url, $encode)
+    protected function handle($driver, $url, $encode)
     {
         $short = false;
         try{
             $short = $driver->shorten($url, $encode);
-        } catch (BitlyRateLimitException $e) {
-            
+        } catch (Exception $e) {
+            // Ignore exceptions so the rotator will attempt the next driver in the list
         }
         return $short;
     }

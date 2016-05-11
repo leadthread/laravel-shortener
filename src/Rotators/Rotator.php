@@ -7,7 +7,6 @@ use Zenapply\Shortener\Exceptions\ShortenerException;
 
 abstract class Rotator implements UrlShortener
 {
-    public $retries = 1;
     protected $drivers;
 
     public function __construct(array $drivers)
@@ -15,17 +14,15 @@ abstract class Rotator implements UrlShortener
         $this->drivers = $drivers;
     }
 
-    abstract protected function tryShortener($driver, $url, $encode);
+    abstract protected function handle($driver, $url, $encode);
 
     public function shorten($url, $encode = true)
     {
         $short = false;
 
-        for ($i=0; $i < $this->retries; $i++) { 
-            foreach ($this->drivers as $driver) {
-                if(!is_string($short)){
-                    $short = $this->tryShortener($driver, $url, $encode);
-                }
+        foreach ($this->drivers as $driver) {
+            if(!is_string($short)){
+                $short = $this->handle($driver, $url, $encode);
             }
         }
 
