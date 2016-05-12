@@ -5,6 +5,9 @@ All notable changes to `laravel-shortener` will be documented in this file.
 ### 3.0.0
 - Updated for Bitly's changes to API authentication
 
+### 2.0.1
+- Added error messages
+
 ### 2.0.0
 - Added support for rotating out different bitly api tokens
 
