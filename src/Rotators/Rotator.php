@@ -8,6 +8,7 @@ use Zenapply\Shortener\Exceptions\ShortenerException;
 abstract class Rotator implements UrlShortener
 {
     protected $drivers;
+    protected $error = "Could not shorten url!";
 
     public function __construct(array $drivers)
     {
@@ -29,7 +30,7 @@ abstract class Rotator implements UrlShortener
         if(is_string($short)){
             return $short;
         } else {
-            throw new ShortenerException("Could not shorten url!");
+            throw new ShortenerException($this->error);
         }
     }
 }
