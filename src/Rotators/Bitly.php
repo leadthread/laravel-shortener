@@ -14,7 +14,6 @@ class Bitly extends Rotator
             $short = $driver->shorten($url, $encode);
         } catch (Exception $e) {
             $this->error = $e->getMessage();
-            // Ignore exceptions so the rotator will attempt the next driver in the list
         }
         return $short;
     }
