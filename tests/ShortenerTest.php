@@ -60,18 +60,18 @@ class ShortenerTest extends TestCase
     protected function getRotatorThatWillFailAllTimes($data, $driver = 'bitly'){
         if($driver==='bitly'){
             $mocks = [];
-            $mocks[] = $this->buildMock(false,'token1',$data,'once');
-            $mocks[] = $this->buildMock(false,'token2',$data,'once');
-            $mocks[] = $this->buildMock(false,'token3',$data,'once');
+            $mocks[] = $this->buildMock(false,'token1','password',$data,'once');
+            $mocks[] = $this->buildMock(false,'token2','password',$data,'once');
+            $mocks[] = $this->buildMock(false,'token3','password',$data,'once');
             return new Shortener(new BitlyDriver(new BitlyRotator($mocks)));
         }
     }
     protected function getRotatorThatWillFailTheFirstTime($data, $driver = 'bitly'){
         if($driver==='bitly'){
             $mocks = [];
-            $mocks[] = $this->buildMock(false,'token1',$data,'once');
-            $mocks[] = $this->buildMock(true, 'token2',$data,'once');
-            $mocks[] = $this->buildMock(true, 'token3',$data,'never');
+            $mocks[] = $this->buildMock(false,'token1','password',$data,'once');
+            $mocks[] = $this->buildMock(true, 'token2','password',$data,'once');
+            $mocks[] = $this->buildMock(true, 'token3','password',$data,'never');
             return new Shortener(new BitlyDriver(new BitlyRotator($mocks)));
         }
     }
@@ -79,15 +79,15 @@ class ShortenerTest extends TestCase
     protected function getRotatorThatWillSucceedTheFirstTime($data, $driver = 'bitly'){
         if($driver==='bitly'){
             $mocks = [];
-            $mocks[] = $this->buildMock(true,'token1',$data,'once');
-            $mocks[] = $this->buildMock(true,'token2',$data,'never');
-            $mocks[] = $this->buildMock(true,'token3',$data,'never');
+            $mocks[] = $this->buildMock(true,'token1','password',$data,'once');
+            $mocks[] = $this->buildMock(true,'token2','password',$data,'never');
+            $mocks[] = $this->buildMock(true,'token3','password',$data,'never');
             return new Shortener(new BitlyDriver(new BitlyRotator($mocks)));
         }
     }
 
-    protected function buildMock($succeed,$token,$data,$freq = 'once'){
-        $mock = $this->getMock(Bitly::class,[],[$token]);
+    protected function buildMock($succeed,$username,$password,$data,$freq = 'once'){
+        $mock = $this->getMock(Bitly::class,[],[$username,$password]);
 
         if($succeed){
             $mock->expects($this->$freq())

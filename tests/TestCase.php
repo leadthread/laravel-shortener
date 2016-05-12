@@ -52,10 +52,10 @@ class TestCase extends Orchestra
                 'duration' => 1440,
             ],
             'bitly' => [
-                ['token' => 'TOKENFOOBAR1'],
-                ['token' => 'TOKENFOOBAR2'],
-                ['token' => 'TOKENFOOBAR3'],
-                ['token' => 'TOKENFOOBAR4'],
+                ['username' => 'USERFOOBAR1', 'password' => 'pass1234'],
+                ['username' => 'USERFOOBAR2', 'password' => 'pass1234'],
+                ['username' => 'USERFOOBAR3', 'password' => 'pass1234'],
+                ['username' => 'USERFOOBAR4', 'password' => 'pass1234'],
             ], 
         ]);
     }
