@@ -64,6 +64,13 @@ class ShortenerTest extends TestCase
         }
     }
 
+    public function testShortenMethodReturnsValueWhenItFailTheFirstServiceAndSucceedOnTheSecondService(){
+        Cache::flush();
+        $shortener = $this->getRotatorThatWillFailTheFirstServiceAndSucceedOnTheSecondService("http://bar.com/");
+        $url = $shortener->shorten("https://foo.bar");
+        $this->assertEquals($url, "http://bar.com/");
+    }
+
     public function testShortenMethodThrowsExceptionWhenItFailsAllTimesBitly(){
         $this->setExpectedException(ShortenerException::class);
         $shortener = $this->getRotatorThatWillFailAllTimes("http://bar.com/", 'bitly');
@@ -79,6 +86,25 @@ class ShortenerTest extends TestCase
     /*========================================
     =            Helper functions            =
     ========================================*/
+
+    protected function getRotatorThatWillFailTheFirstServiceAndSucceedOnTheSecondService($data){
+        $services = [];
+
+        $bitlyMocks = [];
+        $bitlyMocks[] = $this->buildMock('bitly',false,'token1','password','bit.ly/asdf','once');
+        $bitlyMocks[] = $this->buildMock('bitly',false,'token2','password','bit.ly/asdf','once');
+        $bitlyMocks[] = $this->buildMock('bitly',false,'token3','password','bit.ly/asdf','once');
+
+        $googleMocks = [];
+        $googleMocks[] = $this->buildMock('google',true,'token1','password',$data,'once');
+        $googleMocks[] = $this->buildMock('google',false,'token2','password',$data,'never');
+        $googleMocks[] = $this->buildMock('google',false,'token3','password',$data,'never');
+
+        $services[] = new BitlyDriver(new BitlyRotator($bitlyMocks));
+        $services[] = new GoogleDriver(new GoogleRotator($googleMocks));
+        
+        return new Shortener(new ServiceRotator($services));
+    }
 
     protected function getRotatorThatWillFailAllTimes($data, $driver = 'bitly'){
         $services = [];
@@ -96,6 +122,7 @@ class ShortenerTest extends TestCase
         
         return new Shortener(new ServiceRotator($services));
     }
+
     protected function getRotatorThatWillFailTheFirstTime($data, $driver = 'bitly'){
         $services = [];
 

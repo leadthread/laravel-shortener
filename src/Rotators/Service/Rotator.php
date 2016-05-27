@@ -41,10 +41,12 @@ class Rotator implements UrlShortener
         $short = false;
 
         foreach ($this->drivers as $driver) {
-            try {
-                $short = $driver->shorten($url, $encode);
-            } catch (Exception $e) {
-                $this->error = $e;
+            if(!is_string($short)){
+                try {
+                    $short = $driver->shorten($url, $encode);
+                } catch (Exception $e) {
+                    $this->error = $e;
+                }
             }
         }
 
