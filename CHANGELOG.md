@@ -2,9 +2,6 @@
 
 All notable changes to `laravel-shortener` will be documented in this file.
 
-### 4.0.1
-- Added more unit tests
-
 ### 4.0.0
 - Added Google shortener support
 - Can now rotate through various services and various accounts per service
