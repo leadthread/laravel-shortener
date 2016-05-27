@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenapply\Shortener\Rotators;
+namespace Zenapply\Shortener\Rotators\Account;
 
 use Zenapply\Shortener\Interfaces\UrlShortener;
 use Zenapply\Shortener\Exceptions\ShortenerException;

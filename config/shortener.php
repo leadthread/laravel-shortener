@@ -3,7 +3,8 @@
 return [
 
     /**
-     * The url shortening service to use
+     * The url shortening service to use. 
+     * if set to NULL it will use all services in the accounts array
      */
     'driver' => env('SHORTENER_DRIVER','bitly'),
 
@@ -19,21 +20,31 @@ return [
         'duration' => env('SHORTENER_CACHE_DURATION',1440),
     ],
 
-    /**
-     * Bitly settings
-     */
-    'bitly' => [
-        [
-            'username' => env('BITLY_APP_USERNAME_1'), 
-            'password' => env('BITLY_APP_PASSWORD_1')
+    'accounts' => [
+        'google' => [
+            [
+                'token' => env('GOOGLE_SHORTENER_TOKEN_1'), 
+            ],
+            [
+                'token' => env('GOOGLE_SHORTENER_TOKEN_2'), 
+            ],
+            [
+                'token' => env('GOOGLE_SHORTENER_TOKEN_3'), 
+            ],
         ],
-        [
-            'username' => env('BITLY_APP_USERNAME_2'), 
-            'password' => env('BITLY_APP_PASSWORD_2')
-        ],
-        [
-            'username' => env('BITLY_APP_USERNAME_3'), 
-            'password' => env('BITLY_APP_PASSWORD_3')
-        ],
-    ], 
+        'bitly' => [
+            [
+                'username' => env('BITLY_SHORTENER_USERNAME_1'), 
+                'password' => env('BITLY_SHORTENER_PASSWORD_1')
+            ],
+            [
+                'username' => env('BITLY_SHORTENER_USERNAME_2'), 
+                'password' => env('BITLY_SHORTENER_PASSWORD_2')
+            ],
+            [
+                'username' => env('BITLY_SHORTENER_USERNAME_3'), 
+                'password' => env('BITLY_SHORTENER_PASSWORD_3')
+            ],
+        ], 
+    ],
 ];

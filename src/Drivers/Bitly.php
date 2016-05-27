@@ -4,7 +4,7 @@ namespace Zenapply\Shortener\Drivers;
 
 use Zenapply\Bitly\Bitly as BitlyDriver;
 use Zenapply\Shortener\Interfaces\UrlShortener;
-use Zenapply\Shortener\Rotators\Bitly as BitlyRotator;
+use Zenapply\Shortener\Rotators\Account\Bitly as BitlyRotator;
 
 class Bitly implements UrlShortener
 {
@@ -13,7 +13,7 @@ class Bitly implements UrlShortener
 
     public function __construct(BitlyRotator $rotator = null)
     {
-        $this->config = config('shortener.bitly');
+        $this->config = config('shortener.accounts.bitly');
 
         if(!$rotator instanceof BitlyRotator){
             $drivers = [];

@@ -2,16 +2,24 @@
 
 namespace Zenapply\Shortener\Tests;
 
+use Cache;
 use Zenapply\Bitly\Bitly;
+use Zenapply\GoogleShortener\Google;
 use Zenapply\Bitly\Exceptions\BitlyRateLimitException;
 use Zenapply\Shortener\Drivers\Bitly as BitlyDriver;
+use Zenapply\Shortener\Drivers\Google as GoogleDriver;
 use Zenapply\Shortener\Exceptions\ShortenerException;
 use Zenapply\Shortener\Facades\Shortener as ShortenerFacade;
-use Zenapply\Shortener\Rotators\Bitly as BitlyRotator;
+use Zenapply\Shortener\Rotators\Account\Bitly as BitlyRotator;
+use Zenapply\Shortener\Rotators\Account\Google as GoogleRotator;
+use Zenapply\Shortener\Rotators\Service\Rotator as ServiceRotator;
 use Zenapply\Shortener\Shortener;
 
 class ShortenerTest extends TestCase
 {
+
+    protected $drivers = ['google','bitly'];
+
     public function testShortenerFacade(){
         $shortener = ShortenerFacade::getFacadeRoot();
         $this->assertInstanceOf(Shortener::class,$shortener);
@@ -30,26 +38,41 @@ class ShortenerTest extends TestCase
 
     public function testCacheDisabled(){
         $this->app['config']->set('shortener.cache.enabled', false);
-        $shortener = $this->getRotatorThatWillSucceedTheFirstTime("http://bar.com/");
-        $url = $shortener->shorten("https://foo.bar");
-        $this->assertEquals($url, "http://bar.com/");
+        foreach ($this->drivers as $driver) {
+            Cache::flush();
+            $shortener = $this->getRotatorThatWillSucceedTheFirstTime("http://bar.com/", $driver);
+            $url = $shortener->shorten("https://foo.bar");
+            $this->assertEquals($url, "http://bar.com/");
+        }
     }
     
     public function testShortenMethodReturnsValue(){
-        $shortener = $this->getRotatorThatWillSucceedTheFirstTime("http://bar.com/");
-        $url = $shortener->shorten("https://foo.bar");
-        $this->assertEquals($url, "http://bar.com/");
+        foreach ($this->drivers as $driver) {
+            Cache::flush();
+            $shortener = $this->getRotatorThatWillSucceedTheFirstTime("http://bar.com/", $driver);
+            $url = $shortener->shorten("https://foo.bar");
+            $this->assertEquals($url, "http://bar.com/");
+        }
     }
 
     public function testShortenMethodReturnsValueWhenTheRotatorFailsForTheFirstTime(){
-        $shortener = $this->getRotatorThatWillFailTheFirstTime("http://bar.com/");
-        $url = $shortener->shorten("https://foo.bar");
-        $this->assertEquals($url, "http://bar.com/");
+        foreach ($this->drivers as $driver) {
+            Cache::flush();
+            $shortener = $this->getRotatorThatWillFailTheFirstTime("http://bar.com/", $driver);
+            $url = $shortener->shorten("https://foo.bar");
+            $this->assertEquals($url, "http://bar.com/");
+        }
     }
 
-    public function testShortenMethodThrowsExceptionWhenItFailsAllTimes(){
+    public function testShortenMethodThrowsExceptionWhenItFailsAllTimesBitly(){
         $this->setExpectedException(ShortenerException::class);
-        $shortener = $this->getRotatorThatWillFailAllTimes("http://bar.com/");
+        $shortener = $this->getRotatorThatWillFailAllTimes("http://bar.com/", 'bitly');
+        $url = $shortener->shorten("https://foo.bar");
+    }
+
+    public function testShortenMethodThrowsExceptionWhenItFailsAllTimesGoogle(){
+        $this->setExpectedException(ShortenerException::class);
+        $shortener = $this->getRotatorThatWillFailAllTimes("http://bar.com/", 'google');
         $url = $shortener->shorten("https://foo.bar");
     }
 
@@ -58,36 +81,60 @@ class ShortenerTest extends TestCase
     ========================================*/
 
     protected function getRotatorThatWillFailAllTimes($data, $driver = 'bitly'){
-        if($driver==='bitly'){
-            $mocks = [];
-            $mocks[] = $this->buildMock(false,'token1','password',$data,'once');
-            $mocks[] = $this->buildMock(false,'token2','password',$data,'once');
-            $mocks[] = $this->buildMock(false,'token3','password',$data,'once');
-            return new Shortener(new BitlyDriver(new BitlyRotator($mocks)));
+        $services = [];
+
+        $mocks = [];
+        $mocks[] = $this->buildMock($driver,false,'token1','password',$data,'once');
+        $mocks[] = $this->buildMock($driver,false,'token2','password',$data,'once');
+        $mocks[] = $this->buildMock($driver,false,'token3','password',$data,'once');
+
+        if($driver === 'bitly'){
+            $services[] = new BitlyDriver(new BitlyRotator($mocks));
+        } else if($driver === 'google') {
+            $services[] = new GoogleDriver(new GoogleRotator($mocks));
         }
+        
+        return new Shortener(new ServiceRotator($services));
     }
     protected function getRotatorThatWillFailTheFirstTime($data, $driver = 'bitly'){
-        if($driver==='bitly'){
-            $mocks = [];
-            $mocks[] = $this->buildMock(false,'token1','password',$data,'once');
-            $mocks[] = $this->buildMock(true, 'token2','password',$data,'once');
-            $mocks[] = $this->buildMock(true, 'token3','password',$data,'never');
-            return new Shortener(new BitlyDriver(new BitlyRotator($mocks)));
+        $services = [];
+
+        $mocks = [];
+        $mocks[] = $this->buildMock($driver,false,'token1','password',$data,'once');
+        $mocks[] = $this->buildMock($driver,true, 'token2','password',$data,'once');
+        $mocks[] = $this->buildMock($driver,true, 'token3','password',$data,'never');
+
+        if($driver === 'bitly'){
+            $services[] = new BitlyDriver(new BitlyRotator($mocks));
+        } else if($driver === 'google') {
+            $services[] = new GoogleDriver(new GoogleRotator($mocks));
         }
+        
+        return new Shortener(new ServiceRotator($services));
     }
 
     protected function getRotatorThatWillSucceedTheFirstTime($data, $driver = 'bitly'){
-        if($driver==='bitly'){
-            $mocks = [];
-            $mocks[] = $this->buildMock(true,'token1','password',$data,'once');
-            $mocks[] = $this->buildMock(true,'token2','password',$data,'never');
-            $mocks[] = $this->buildMock(true,'token3','password',$data,'never');
-            return new Shortener(new BitlyDriver(new BitlyRotator($mocks)));
+        $services = [];
+
+        $mocks = [];
+        $mocks[] = $this->buildMock($driver,true,'token1','password',$data,'once');
+        $mocks[] = $this->buildMock($driver,true,'token2','password',$data,'never');
+        $mocks[] = $this->buildMock($driver,true,'token3','password',$data,'never');
+
+        if($driver === 'bitly'){
+            $services[] = new BitlyDriver(new BitlyRotator($mocks));
+        } else if($driver === 'google') {
+            $services[] = new GoogleDriver(new GoogleRotator($mocks));
         }
+        
+        return new Shortener(new ServiceRotator($services));
     }
 
-    protected function buildMock($succeed,$username,$password,$data,$freq = 'once'){
-        $mock = $this->getMock(Bitly::class,[],[$username,$password]);
+    protected function buildMock($driver,$succeed,$username,$password,$data,$freq = 'once'){
+        if($driver === 'bitly')
+            $mock = $this->getMock(Bitly::class,[],[$username,$password]);
+        else if($driver === 'google')
+            $mock = $this->getMock(Google::class,[],[$username]);
 
         if($succeed){
             $mock->expects($this->$freq())
