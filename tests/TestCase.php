@@ -46,17 +46,38 @@ class TestCase extends Orchestra
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('shortener', [
-            'driver' => 'bitly',
+            'driver' => null,
             'cache' => [
-                'enabled'  => true,
+                'enabled' => true,
                 'duration' => 1440,
             ],
-            'bitly' => [
-                ['username' => 'USERFOOBAR1', 'password' => 'pass1234'],
-                ['username' => 'USERFOOBAR2', 'password' => 'pass1234'],
-                ['username' => 'USERFOOBAR3', 'password' => 'pass1234'],
-                ['username' => 'USERFOOBAR4', 'password' => 'pass1234'],
-            ], 
+            'accounts' => [
+                'google' => [
+                    [
+                        'token' => 'GOOGLE_SHORTENER_TOKEN_1' 
+                    ],
+                    [
+                        'token' => 'GOOGLE_SHORTENER_TOKEN_2' 
+                    ],
+                    [
+                        'token' => 'GOOGLE_SHORTENER_TOKEN_3' 
+                    ],
+                ],
+                'bitly' => [
+                    [
+                        'username' => 'USERNAME', 
+                        'password' => 'PASSWORD'
+                    ],
+                    [
+                        'username' => 'USERNAME', 
+                        'password' => 'PASSWORD'
+                    ],
+                    [
+                        'username' => 'USERNAME', 
+                        'password' => 'PASSWORD'
+                    ],
+                ], 
+            ],
         ]);
     }
 

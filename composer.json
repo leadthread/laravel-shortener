@@ -3,10 +3,10 @@
     "description": "",
     "keywords": [
         "laravel",
-        "url shortener",
         "shortener",
-        "url",
         "tylercd100",
+        "url shortener",
+        "url",
         "zenapply"
     ],
     "homepage": "https://github.com/zenapply/laravel-shortener",
@@ -29,9 +29,10 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": "^5.4|^7.0",
         "illuminate/support": "^5.0",
-        "zenapply/php-bitly": "^2.0"
+        "php": "^5.4|^7.0",
+        "zenapply/php-bitly": "^2.0",
+        "zenapply/php-google-shortener": "^1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^3.1",
