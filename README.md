@@ -11,6 +11,7 @@ Laravel Shortener is a simple package for shortening URL's through various onlin
 
 Currently supported:
 - [Bitly](https://bitly.com/)
+- [Google](https://developers.google.com/url-shortener/)
 
 ## Installation
 
@@ -40,6 +41,7 @@ Then you can simply shorten a URL like this:
 ```php
 $url = "https://github.com/zenapply/laravel-shortener";
 $shortUrl = Shortener::shorten($url);
+// (string) http://bit.ly/2amWdrE
 ```
 
 Laravel Shortener also takes advantage or Laravel's caching features. Just simply edit your config file to change the caching variables.
