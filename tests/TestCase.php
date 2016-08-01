@@ -65,16 +65,13 @@ class TestCase extends Orchestra
                 ],
                 'bitly' => [
                     [
-                        'username' => 'USERNAME', 
-                        'password' => 'PASSWORD'
+                        'token' => 'BITLY_SHORTENER_TOKEN_1', 
                     ],
                     [
-                        'username' => 'USERNAME', 
-                        'password' => 'PASSWORD'
+                        'token' => 'BITLY_SHORTENER_TOKEN_2', 
                     ],
                     [
-                        'username' => 'USERNAME', 
-                        'password' => 'PASSWORD'
+                        'token' => 'BITLY_SHORTENER_TOKEN_3', 
                     ],
                 ], 
             ],

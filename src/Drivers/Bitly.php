@@ -19,7 +19,7 @@ class Bitly implements UrlShortener
             $drivers = [];
 
             foreach ($this->config as $c) {
-                $drivers[] = new BitlyDriver($c['username'], $c['password']);
+                $drivers[] = new BitlyDriver($c['token']);
             }
 
             $rotator = new BitlyRotator($drivers);

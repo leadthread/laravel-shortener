@@ -31,7 +31,7 @@
     "require": {
         "illuminate/support": "^5.0",
         "php": "^5.4|^7.0",
-        "zenapply/php-bitly": "^2.0",
+        "zenapply/php-bitly": "^3.0",
         "zenapply/php-google-shortener": "^1.0"
     },
     "require-dev": {

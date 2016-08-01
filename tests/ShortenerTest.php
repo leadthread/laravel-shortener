@@ -91,14 +91,14 @@ class ShortenerTest extends TestCase
         $services = [];
 
         $bitlyMocks = [];
-        $bitlyMocks[] = $this->buildMock('bitly',false,'token1','password','bit.ly/asdf','once');
-        $bitlyMocks[] = $this->buildMock('bitly',false,'token2','password','bit.ly/asdf','once');
-        $bitlyMocks[] = $this->buildMock('bitly',false,'token3','password','bit.ly/asdf','once');
+        $bitlyMocks[] = $this->buildMock('bitly',false,'token1','bit.ly/asdf','once');
+        $bitlyMocks[] = $this->buildMock('bitly',false,'token2','bit.ly/asdf','once');
+        $bitlyMocks[] = $this->buildMock('bitly',false,'token3','bit.ly/asdf','once');
 
         $googleMocks = [];
-        $googleMocks[] = $this->buildMock('google',true,'token1','password',$data,'once');
-        $googleMocks[] = $this->buildMock('google',false,'token2','password',$data,'never');
-        $googleMocks[] = $this->buildMock('google',false,'token3','password',$data,'never');
+        $googleMocks[] = $this->buildMock('google',true,'token1',$data,'once');
+        $googleMocks[] = $this->buildMock('google',false,'token2',$data,'never');
+        $googleMocks[] = $this->buildMock('google',false,'token3',$data,'never');
 
         $services[] = new BitlyDriver(new BitlyRotator($bitlyMocks));
         $services[] = new GoogleDriver(new GoogleRotator($googleMocks));
@@ -110,9 +110,9 @@ class ShortenerTest extends TestCase
         $services = [];
 
         $mocks = [];
-        $mocks[] = $this->buildMock($driver,false,'token1','password',$data,'once');
-        $mocks[] = $this->buildMock($driver,false,'token2','password',$data,'once');
-        $mocks[] = $this->buildMock($driver,false,'token3','password',$data,'once');
+        $mocks[] = $this->buildMock($driver,false,'token1',$data,'once');
+        $mocks[] = $this->buildMock($driver,false,'token2',$data,'once');
+        $mocks[] = $this->buildMock($driver,false,'token3',$data,'once');
 
         if($driver === 'bitly'){
             $services[] = new BitlyDriver(new BitlyRotator($mocks));
@@ -127,9 +127,9 @@ class ShortenerTest extends TestCase
         $services = [];
 
         $mocks = [];
-        $mocks[] = $this->buildMock($driver,false,'token1','password',$data,'once');
-        $mocks[] = $this->buildMock($driver,true, 'token2','password',$data,'once');
-        $mocks[] = $this->buildMock($driver,true, 'token3','password',$data,'never');
+        $mocks[] = $this->buildMock($driver,false,'token1',$data,'once');
+        $mocks[] = $this->buildMock($driver,true, 'token2',$data,'once');
+        $mocks[] = $this->buildMock($driver,true, 'token3',$data,'never');
 
         if($driver === 'bitly'){
             $services[] = new BitlyDriver(new BitlyRotator($mocks));
@@ -144,9 +144,9 @@ class ShortenerTest extends TestCase
         $services = [];
 
         $mocks = [];
-        $mocks[] = $this->buildMock($driver,true,'token1','password',$data,'once');
-        $mocks[] = $this->buildMock($driver,true,'token2','password',$data,'never');
-        $mocks[] = $this->buildMock($driver,true,'token3','password',$data,'never');
+        $mocks[] = $this->buildMock($driver,true,'token1',$data,'once');
+        $mocks[] = $this->buildMock($driver,true,'token2',$data,'never');
+        $mocks[] = $this->buildMock($driver,true,'token3',$data,'never');
 
         if($driver === 'bitly'){
             $services[] = new BitlyDriver(new BitlyRotator($mocks));
@@ -157,11 +157,11 @@ class ShortenerTest extends TestCase
         return new Shortener(new ServiceRotator($services));
     }
 
-    protected function buildMock($driver,$succeed,$username,$password,$data,$freq = 'once'){
+    protected function buildMock($driver,$succeed,$token,$data,$freq = 'once'){
         if($driver === 'bitly')
-            $mock = $this->getMock(Bitly::class,[],[$username,$password]);
+            $mock = $this->getMock(Bitly::class,[],[$token]);
         else if($driver === 'google')
-            $mock = $this->getMock(Google::class,[],[$username]);
+            $mock = $this->getMock(Google::class,[],[$token]);
 
         if($succeed){
             $mock->expects($this->$freq())
