@@ -34,16 +34,13 @@ return [
         ],
         'bitly' => [
             [
-                'username' => env('BITLY_SHORTENER_USERNAME_1'), 
-                'password' => env('BITLY_SHORTENER_PASSWORD_1')
+                'token' => env('BITLY_SHORTENER_TOKEN_1'), 
             ],
             [
-                'username' => env('BITLY_SHORTENER_USERNAME_2'), 
-                'password' => env('BITLY_SHORTENER_PASSWORD_2')
+                'token' => env('BITLY_SHORTENER_TOKEN_2'), 
             ],
             [
-                'username' => env('BITLY_SHORTENER_USERNAME_3'), 
-                'password' => env('BITLY_SHORTENER_PASSWORD_3')
+                'token' => env('BITLY_SHORTENER_TOKEN_3'), 
             ],
         ], 
     ],
