@@ -51,7 +51,7 @@ class Shortener
     {
         $rotator = $this->rotator;
         if ($this->config['cache']['enabled'] === true) {
-            $this->getFromCache($url, $this->config['cache']['duration'], function () use ($rotator, $url, $encode) {
+            return $this->getFromCache($url, $this->config['cache']['duration'], function () use ($rotator, $url, $encode) {
                 return $rotator->shorten($url, $encode);
             });
         } else {

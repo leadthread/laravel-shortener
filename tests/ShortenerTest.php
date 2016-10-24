@@ -20,6 +20,12 @@ class ShortenerTest extends TestCase
 
     protected $drivers = ['google', 'bitly'];
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->app['config']->set('cache.default', 'array');
+    }
+
     public function testShortenerFacade()
     {
         $shortener = ShortenerFacade::getFacadeRoot();
