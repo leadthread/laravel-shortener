@@ -1,12 +1,12 @@
 <?php
 
-namespace Zenapply\Shortener\Rotators\Service;
+namespace LeadThread\Shortener\Rotators\Service;
 
 use Exception;
-use Zenapply\Shortener\Interfaces\UrlShortener;
-use Zenapply\Shortener\Exceptions\ShortenerException;
-use Zenapply\Shortener\Drivers\Bitly;
-use Zenapply\Shortener\Drivers\Google;
+use LeadThread\Shortener\Interfaces\UrlShortener;
+use LeadThread\Shortener\Exceptions\ShortenerException;
+use LeadThread\Shortener\Drivers\Bitly;
+use LeadThread\Shortener\Drivers\Google;
 
 class Rotator implements UrlShortener
 {

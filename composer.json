@@ -1,5 +1,5 @@
 {
-    "name": "zenapply/laravel-shortener",
+    "name": "leadthread/laravel-shortener",
     "description": "",
     "keywords": [
         "laravel",
@@ -7,9 +7,9 @@
         "tylercd100",
         "url shortener",
         "url",
-        "zenapply"
+        "leadthread"
     ],
-    "homepage": "https://github.com/zenapply/laravel-shortener",
+    "homepage": "https://github.com/leadthread/laravel-shortener",
     "license": "MIT",
     "authors": [
         {
@@ -19,20 +19,20 @@
     ],
     "autoload":{
         "psr-4":{
-            "Zenapply\\Shortener\\":"src/"
+            "LeadThread\\Shortener\\":"src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Zenapply\\Shortener\\Tests\\": "tests/"
+            "LeadThread\\Shortener\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",
     "require": {
         "illuminate/support": "^5.0",
         "php": "^5.4|^7.0",
-        "zenapply/php-bitly": "^3.0",
-        "zenapply/php-google-shortener": "^1.0"
+        "leadthread/php-bitly": "^3.0",
+        "leadthread/php-google-shortener": "^1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^3.1",

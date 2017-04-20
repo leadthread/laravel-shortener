@@ -1,10 +1,10 @@
 <?php
 
-namespace Zenapply\Shortener\Drivers;
+namespace LeadThread\Shortener\Drivers;
 
-use Zenapply\GoogleShortener\Google as GoogleDriver;
-use Zenapply\Shortener\Interfaces\UrlShortener;
-use Zenapply\Shortener\Rotators\Account\Google as GoogleRotator;
+use LeadThread\GoogleShortener\Google as GoogleDriver;
+use LeadThread\Shortener\Interfaces\UrlShortener;
+use LeadThread\Shortener\Rotators\Account\Google as GoogleRotator;
 
 class Google implements UrlShortener
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Zenapply\Shortener\Rotators\Account;
+namespace LeadThread\Shortener\Rotators\Account;
 
 use Exception;
-use Zenapply\GoogleShortener\Google as GoogleDriver;
-use Zenapply\Shortener\Exceptions\ShortenerException;
+use LeadThread\GoogleShortener\Google as GoogleDriver;
+use LeadThread\Shortener\Exceptions\ShortenerException;
 
 class Google extends Rotator
 {

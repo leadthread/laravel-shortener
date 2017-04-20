@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-shortener` will be documented in this file.
 
+### 6.0.0
+- Changed ownership from zenapply to leadthread
+- Namespace changes
+
 ### 5.0.1
 - Now supports cache drivers that do not have tagging support
 

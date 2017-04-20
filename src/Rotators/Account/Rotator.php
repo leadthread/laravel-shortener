@@ -1,9 +1,9 @@
 <?php
 
-namespace Zenapply\Shortener\Rotators\Account;
+namespace LeadThread\Shortener\Rotators\Account;
 
-use Zenapply\Shortener\Interfaces\UrlShortener;
-use Zenapply\Shortener\Exceptions\ShortenerException;
+use LeadThread\Shortener\Interfaces\UrlShortener;
+use LeadThread\Shortener\Exceptions\ShortenerException;
 
 abstract class Rotator implements UrlShortener
 {

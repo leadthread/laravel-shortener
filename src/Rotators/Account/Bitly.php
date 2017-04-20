@@ -1,10 +1,10 @@
 <?php
 
-namespace Zenapply\Shortener\Rotators\Account;
+namespace LeadThread\Shortener\Rotators\Account;
 
 use Exception;
-use Zenapply\Bitly\Bitly as BitlyDriver;
-use Zenapply\Shortener\Exceptions\ShortenerException;
+use LeadThread\Bitly\Bitly as BitlyDriver;
+use LeadThread\Shortener\Exceptions\ShortenerException;
 
 class Bitly extends Rotator
 {

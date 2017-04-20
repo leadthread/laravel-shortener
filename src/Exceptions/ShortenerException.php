@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenapply\Shortener\Exceptions;
+namespace LeadThread\Shortener\Exceptions;
 
 class ShortenerException extends \Exception
 {

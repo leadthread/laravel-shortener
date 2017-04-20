@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenapply\Shortener\Tests;
+namespace LeadThread\Shortener\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -24,7 +24,7 @@ class TestCase extends Orchestra
      */
     protected function getPackageProviders($app)
     {
-        return ['Zenapply\Shortener\ShortenerServiceProvider'];
+        return ['LeadThread\Shortener\ShortenerServiceProvider'];
     }
 
     /**
@@ -33,7 +33,7 @@ class TestCase extends Orchestra
     protected function getPackageAliases($app)
     {
         return [
-            'Zenapply\Shortener\Facades\Shortener',
+            'LeadThread\Shortener\Facades\Shortener',
         ];
     }
 

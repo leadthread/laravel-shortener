@@ -1,19 +1,19 @@
 <?php
 
-namespace Zenapply\Shortener\Tests;
+namespace LeadThread\Shortener\Tests;
 
 use Cache;
-use Zenapply\Bitly\Bitly;
-use Zenapply\GoogleShortener\Google;
-use Zenapply\Bitly\Exceptions\BitlyRateLimitException;
-use Zenapply\Shortener\Drivers\Bitly as BitlyDriver;
-use Zenapply\Shortener\Drivers\Google as GoogleDriver;
-use Zenapply\Shortener\Exceptions\ShortenerException;
-use Zenapply\Shortener\Facades\Shortener as ShortenerFacade;
-use Zenapply\Shortener\Rotators\Account\Bitly as BitlyRotator;
-use Zenapply\Shortener\Rotators\Account\Google as GoogleRotator;
-use Zenapply\Shortener\Rotators\Service\Rotator as ServiceRotator;
-use Zenapply\Shortener\Shortener;
+use LeadThread\Bitly\Bitly;
+use LeadThread\GoogleShortener\Google;
+use LeadThread\Bitly\Exceptions\BitlyRateLimitException;
+use LeadThread\Shortener\Drivers\Bitly as BitlyDriver;
+use LeadThread\Shortener\Drivers\Google as GoogleDriver;
+use LeadThread\Shortener\Exceptions\ShortenerException;
+use LeadThread\Shortener\Facades\Shortener as ShortenerFacade;
+use LeadThread\Shortener\Rotators\Account\Bitly as BitlyRotator;
+use LeadThread\Shortener\Rotators\Account\Google as GoogleRotator;
+use LeadThread\Shortener\Rotators\Service\Rotator as ServiceRotator;
+use LeadThread\Shortener\Shortener;
 
 class ShortenerTest extends TestCase
 {

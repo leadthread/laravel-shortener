@@ -1,13 +1,13 @@
 <?php
 
-namespace Zenapply\Shortener;
+namespace LeadThread\Shortener;
 
 use Exception;
 use Illuminate\Support\Facades\Cache;
-use Zenapply\Shortener\Drivers\Bitly;
-use Zenapply\Shortener\Interfaces\UrlShortener;
-use Zenapply\Shortener\Exceptions\ShortenerException;
-use Zenapply\Shortener\Rotators\Service\Rotator as ServiceRotator;
+use LeadThread\Shortener\Drivers\Bitly;
+use LeadThread\Shortener\Interfaces\UrlShortener;
+use LeadThread\Shortener\Exceptions\ShortenerException;
+use LeadThread\Shortener\Rotators\Service\Rotator as ServiceRotator;
 use Illuminate\Cache\TaggableStore;
 
 /**

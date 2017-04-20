@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenapply\Shortener;
+namespace LeadThread\Shortener;
 
 use Illuminate\Support\ServiceProvider;
 

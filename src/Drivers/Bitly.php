@@ -1,10 +1,10 @@
 <?php
 
-namespace Zenapply\Shortener\Drivers;
+namespace LeadThread\Shortener\Drivers;
 
-use Zenapply\Bitly\Bitly as BitlyDriver;
-use Zenapply\Shortener\Interfaces\UrlShortener;
-use Zenapply\Shortener\Rotators\Account\Bitly as BitlyRotator;
+use LeadThread\Bitly\Bitly as BitlyDriver;
+use LeadThread\Shortener\Interfaces\UrlShortener;
+use LeadThread\Shortener\Rotators\Account\Bitly as BitlyRotator;
 
 class Bitly implements UrlShortener
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenapply\Shortener\Facades;
+namespace LeadThread\Shortener\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
