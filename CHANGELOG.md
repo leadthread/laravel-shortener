@@ -2,6 +2,9 @@
 
 All notable changes to `laravel-shortener` will be documented in this file.
 
+### 6.0.1
+- Fixed package requirements
+
 ### 6.0.0
 - Changed ownership from zenapply to leadthread
 - Namespace changes
