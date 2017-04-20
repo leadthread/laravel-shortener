@@ -31,8 +31,8 @@
     "require": {
         "illuminate/support": "^5.0",
         "php": "^5.4|^7.0",
-        "leadthread/php-bitly": "^3.0",
-        "leadthread/php-google-shortener": "^1.0"
+        "leadthread/php-bitly": "^4.0",
+        "leadthread/php-google-shortener": "^2.0"
     },
     "require-dev": {
         "orchestra/testbench": "^3.1",
