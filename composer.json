@@ -31,12 +31,12 @@
     "require": {
         "laravel/framework": "^8.0",
         "php": "^7.0",
-        "leadthread/php-bitly": "^4.0",
+        "leadthread/php-bitly": "dev-laravel-8",
         "leadthread/php-google-shortener": "^2.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^4.8 || ^5.0"
+        "phpunit/phpunit": "^9.5"
     },
     "suggest": {
     }

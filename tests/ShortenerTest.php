@@ -20,7 +20,7 @@ class ShortenerTest extends TestCase
 
     protected $drivers = ['google', 'bitly'];
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->app['config']->set('cache.default', 'array');
